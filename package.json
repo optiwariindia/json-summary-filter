@@ -1,6 +1,6 @@
 {
   "name": "json-summary-filter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Apply filters on JSON Data read trhough file system",
   "main": "aggregations.js",
   "keywords": ["Aggregations","Filters","JSON","Summary"],

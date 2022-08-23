@@ -23,7 +23,11 @@ Repeat above lines to apply multiple filters
 ```jsonservice.filters.clear()```
 
 ### Create summary
-``` let summary = jsonservice.summary()```
+``` let summary = jsonservice.summary(jsonservice.filters.apply())```
+
+You can use this module to generate summary of your own JSON Arrays
+
+``` let summary = jsonservice.summary(YourJSONArray)```
 
 # For suggestions and support 
 

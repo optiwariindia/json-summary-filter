@@ -1,29 +1,29 @@
 const fs = require('fs')
-const panelService = {
+let database=[];
+let src="";
+let info={};
+let filters={};
+module.exports= {
   src: {
-    value: '',
     set: (path) => {
-      panelService.src.value = path
-      panelService.database = JSON.parse(
-        fs.readFileSync(panelService.src.value),
+      src= path
+      database= JSON.parse(
+        fs.readFileSync(src),
       )
     },
   },
-  database: [],
   filters: {
-    info: {},
     add: (name, value) => {
-      if (!(name in panelService.filters.info)) {
-        panelService.filters.info[name] = []
+      if (!(name in filters)) {
+        filters[name] = []
       }
-      panelService.filters.info[name].push(value)
+      filters[name].push(value)
     },
     clear: () => {
-      panelService.filters.info = {}
+      filters = {}
     },
     apply: () => {
-      let filters = panelService.filters.info
-      return panelService.database.filter((data) => {
+      return database.filter((data) => {
         let keys = Object.keys(filters)
         for (let index = 0; index < keys.length; index++) {
           const key = keys[index]
@@ -33,8 +33,7 @@ const panelService = {
       })
     },
   },
-  summary: () => {
-    let info = panelService.filters.apply()
+  summary: (info=[]) => {
     let summary = {}
     info.forEach((data) => {
       let keys = Object.keys(data)
@@ -48,4 +47,3 @@ const panelService = {
     return summary
   },
 }
-module.exports = panelService;
